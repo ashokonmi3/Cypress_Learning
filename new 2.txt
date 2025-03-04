@@ -1,0 +1,21 @@
+describe('Alert Handling in Cypress', () => {
+  beforeEach(() => {
+    cy.visit('https://ashokonmi3.github.io/Selenium.Pages/Practice_handling_Alerts.html');
+  });
+
+  it('Handles JavaScript Alert', () => {
+    // Click the button that triggers the alert
+    cy.get('[name="alert"]').click();
+
+    // Cypress automatically handles alerts, but we can verify the alert text
+    cy.on('window:alert', (alertText) => {
+      expect(alertText).to.equal('I am alert');
+    });
+
+    // Since Cypress automatically accepts alerts, no need to call `.accept()`
+    cy.wait(5000);
+
+    // Test passes if the alert text matches
+    cy.log('TEST PASS');
+  });
+});
